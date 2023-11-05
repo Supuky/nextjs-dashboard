@@ -1,5 +1,6 @@
 import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
+import { deleteInvoice } from "@/app/lib/actions";
 
 export function CreateInvoice() {
   return (
@@ -16,7 +17,7 @@ export function CreateInvoice() {
 export function UpdateInvoice({ id }: { id: string }) {
   return (
     <Link
-      href="/dashboard/invoices"
+      href={`/dashboard/invoices/${id}/edit`}
       className="rounded-md border p-2 hover:bg-gray-100"
     >
       <PencilIcon className="w-5" />
@@ -25,12 +26,17 @@ export function UpdateInvoice({ id }: { id: string }) {
 }
 
 export function DeleteInvoice({ id }: { id: string }) {
+  // すでにある他の関数.bind(パラメータthis, 引数1, 引数2, ... ,引数N)
+  // bind(null) を使用する一般的なケースは、元の関数の this コンテキストを変更せずに、初期引数を設定した新しい関数を作成する場合です。このような場合、this の値を変更しないため、null を指定します。
+  // バインドした関数を使うことで、特定のコンテキストで呼び出される関数を作成したり、特定の引数を持つ関数を作成したりすることができます。
+  const deleteInvoiceWithId = deleteInvoice.bind(null, id);
+
   return (
-    <>
+    <form action={deleteInvoiceWithId}>
       <button className="rounded-md border p-2 hover:bg-gray-100">
         <span className="sr-only">Delete</span>
         <TrashIcon className="w-5" />
       </button>
-    </>
+    </form>
   );
 }
