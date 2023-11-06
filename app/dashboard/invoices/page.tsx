@@ -2,10 +2,15 @@ import Pagination from '@/app/ui/invoices/pagination';
 import { fetchInvoicesPages } from '@/app/lib/data';
 import Search from '@/app/ui/search';
 import Table from '@/app/ui/invoices/table';
+import { Metadata } from "next";
 import { CreateInvoice } from '@/app/ui/invoices/buttons';
 import { lusitana } from '@/app/ui/fonts';
 import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
 import { Suspense } from 'react';
+
+export const metadata: Metadata = {
+  title: 'Invoices',
+};
  
 // Pageはルート固有のUIで params, searchParamsというpropsを受け取る(params: { slug: string } searchParams: { [key: string]: string | string[] | undefined })
 export default async function Page({ searchParams }: { searchParams?: { query?: string; page?: string } }) {
